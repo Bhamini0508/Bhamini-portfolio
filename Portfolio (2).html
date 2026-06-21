@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhamini — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root{
+    --ink:#0A0C10;
+    --ink-soft:#12151A;
+    --cream:#F0F4F2;
+    --cream-dim:#8C968F;
+    --amber:#00E676;
+    --amber-soft:#0C3322;
+    --sage:#00B8D9;
+    --line:rgba(240,244,242,0.1);
+
+    --display: 'Fraunces', serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--amber);color:var(--ink);}
+
+  a{color:inherit;text-decoration:none;}
+
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ============ FOCUS STATES ============ */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ============ REDUCED MOTION ============ */
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ============ NAV ============ */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(20,23,31,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px;
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .logo{
+    font-family:var(--display);
+    font-size:1.25rem;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--amber);}
+  .navlinks{
+    display:flex;
+    gap:28px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--cream-dim);
+  }
+  .navlinks a{transition:color 0.2s;}
+  .navlinks a:hover{color:var(--amber);}
+  .navlinks .stagecount{
+    color:var(--sage);
+    font-size:0.7rem;
+    margin-left:3px;
+  }
+  .nav-icons{
+    display:flex;
+    gap:16px;
+    margin-left:28px;
+    color:var(--cream-dim);
+  }
+  .nav-icons a{
+    display:flex;
+    transition:color 0.2s;
+  }
+  .nav-icons a:hover{color:var(--amber);}
+  @media (max-width:680px){
+    .navlinks{gap:16px; font-size:0.68rem;}
+    .nav-icons{margin-left:14px; gap:12px;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-top:90px;
+    position:relative;
+  }
+
+  .pipeline-bg{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+    opacity:0.5;
+  }
+  .pipeline-bg svg{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:140%;
+    max-width:1400px;
+  }
+
+  .hero-content{position:relative; z-index:1;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--amber);
+    display:inline-block;
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.3;}
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(2.6rem, 7vw, 5rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    max-width:780px;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--amber);
+  }
+
+  .hero-sub{
+    margin-top:26px;
+    font-size:1.15rem;
+    color:var(--cream-dim);
+    max-width:560px;
+  }
+
+  .hero-actions{
+    margin-top:40px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+    padding:14px 26px;
+    border-radius:3px;
+    transition:all 0.2s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-primary{
+    background:var(--amber);
+    color:var(--ink);
+  }
+  .btn-primary:hover{
+    background:#dba055;
+    transform:translateY(-2px);
+  }
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--cream);
+  }
+  .btn-ghost:hover{
+    border-color:var(--amber);
+    color:var(--amber);
+  }
+
+  /* ============ SECTION SHELL ============ */
+  section{
+    padding:120px 0;
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .stage-tag{
+    font-family:var(--mono);
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink);
+    background:var(--amber);
+    padding:4px 10px;
+    border-radius:3px;
+    font-weight:500;
+  }
+  .section-title{
+    font-family:var(--display);
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    font-weight:500;
+  }
+  .section-meta{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--cream-dim);
+    margin-left:auto;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ============ ABOUT (stage: LEAD) ============ */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .about-text p{
+    font-size:1.05rem;
+    color:var(--cream-dim);
+    margin-bottom:18px;
+  }
+  .about-text strong{color:var(--cream); font-weight:600;}
+
+  .stat-card{
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px;
+    margin-bottom:14px;
+  }
+  .stat-num{
+    font-family:var(--display);
+    font-size:2.2rem;
+    color:var(--amber);
+    font-weight:600;
+    line-height:1;
+  }
+  .stat-label{
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--cream-dim);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-top:6px;
+  }
+
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+
+  /* ============ SKILLS (stage: QUALIFIED) ============ */
+  .skill-rows{display:flex; flex-direction:column; gap:0;}
+  .skill-row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:24px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    align-items:baseline;
+  }
+  .skill-row:first-child{border-top:1px solid var(--line);}
+  .skill-cat{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--sage);
+  }
+  .skill-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .skill-tag{
+    font-size:0.92rem;
+    padding:6px 14px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--cream);
+    transition:border-color 0.2s, color 0.2s;
+  }
+  .skill-tag:hover{
+    border-color:var(--amber);
+    color:var(--amber);
+  }
+  @media (max-width:600px){
+    .skill-row{grid-template-columns:1fr; gap:8px;}
+  }
+
+  /* ============ PROJECTS (stage: WORKING) ============ */
+  .project-list{display:flex; flex-direction:column; gap:1px;}
+  .project{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:32px;
+    margin-bottom:20px;
+    transition:border-color 0.25s, background 0.25s;
+    position:relative;
+  }
+  .project:hover{
+    border-color:var(--amber);
+    background:var(--ink-soft);
+  }
+  .project-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:14px;
+  }
+  .project-title{
+    font-family:var(--display);
+    font-size:1.5rem;
+    font-weight:500;
+  }
+  .project-stack{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ink);
+    background:var(--sage);
+    padding:4px 10px;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+  .project-desc{
+    color:var(--cream-dim);
+    font-size:0.98rem;
+    margin-bottom:18px;
+    max-width:680px;
+  }
+  .project-links{
+    display:flex;
+    gap:20px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+  }
+  .project-links a{
+    color:var(--amber);
+    border-bottom:1px solid transparent;
+  }
+  .project-links a:hover{border-bottom-color:var(--amber);}
+
+  /* ============ CONTACT (stage: CLOSED) ============ */
+  .contact-shell{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  .contact-cta h2{
+    font-family:var(--display);
+    font-size:clamp(2rem,5vw,3.2rem);
+    font-weight:500;
+    line-height:1.1;
+    margin-bottom:20px;
+  }
+  .contact-cta p{
+    color:var(--cream-dim);
+    max-width:420px;
+    margin-bottom:30px;
+  }
+  .contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .contact-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .contact-item:first-child{border-top:1px solid var(--line);}
+  .contact-label{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--sage);
+  }
+  .contact-value{
+    font-size:1rem;
+    transition:color 0.2s;
+  }
+  .contact-item a:hover .contact-value{color:var(--amber);}
+
+  @media (max-width:760px){
+    .contact-shell{grid-template-columns:1fr;}
+  }
+
+  footer{
+    padding:36px 0;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--cream-dim);
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Bhamini<span>.</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-icons">
+      <a href="#contact" aria-label="Email — jump to contact section">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      </a>
+      <a href="#contact" aria-label="LinkedIn — jump to contact section">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8"/><path d="M12 16v-3a2 2 0 0 1 4 0v3"/><line x1="12" y1="11" x2="12" y2="16"/></svg>
+      </a>
+      <a href="#contact" aria-label="GitHub — jump to contact section">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2-.2 4-1 4-4.5a3.5 3.5 0 0 0-1-2.5c.3-1 .3-2 0-3 0 0-1 0-2.5 1.1a8.5 8.5 0 0 0-4 0C9.5 5.1 8.5 5.1 8.5 5.1c-.3 1-.3 2 0 3a3.5 3.5 0 0 0-1 2.5c0 3.5 2 4.3 4 4.5-.6.6-.6 1.2-.5 2V21"/></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="border-top:none; padding-bottom:60px;">
+  <div class="pipeline-bg">
+    <svg viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 200 Q 200 100 400 200 T 800 200" stroke="#C8893D" stroke-width="1" opacity="0.3"/>
+      <path d="M0 250 Q 200 350 400 250 T 800 250" stroke="#7A8B7C" stroke-width="1" opacity="0.25"/>
+      <circle cx="120" cy="180" r="3" fill="#C8893D" opacity="0.6"/>
+      <circle cx="400" cy="200" r="3" fill="#C8893D" opacity="0.6"/>
+      <circle cx="680" cy="190" r="3" fill="#C8893D" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">Open to Internships &amp; Collaborations</div>
+    <h1>Building at the intersection of <em>data</em> and the <em>deal.</em></h1>
+    <p class="hero-sub">I'm Bhamini — an AI &amp; Data Science undergrad who closes leads by day and ships ML projects by night, figuring out how technical depth and sales instinct compound.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View Pipeline →</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT — STAGE: LEAD ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">About</h2>
+      <span class="section-meta">Chengalpattu, Tamil Nadu</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p> I'm a first year B.Tech student in AI & data science.Alongside my degree,I work on the commercial side too-cold calling and lead generation across various niches.I'm drawn to roles that combine technology with business,including solutions engineering, pre-sales,and product.Outside of work, I enjoy reading about business,finance,AI,and startups to broaden my perspectives and understand how successful product are built and scaled.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Active leads in CRM pipeline</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Certifications — NVIDIA RAG, Google AI Essentials</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS — STAGE: QUALIFIED ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skill-rows reveal">
+      <div class="skill-row">
+        <div class="skill-cat">Technical</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Data Visualization</span>
+          <span class="skill-tag">Google Colab</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">C</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Commercial</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Cold Calling</span>
+          <span class="skill-tag">Lead Generation</span>
+          <span class="skill-tag">CRM Management</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">Microsoft Office</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Google Workspace</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Currently Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Advanced Python</span>
+          <span class="skill-tag">Product Thinking</span>
+          <span class="skill-tag">Product Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS — STAGE: WORKING ============ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Projects</h2>
+    </div>
+    <div class="project-list reveal">
+
+      <div class="project">
+        <div class="project-top">
+          <div class="project-title">California Housing — Price Prediction</div>
+          <div class="project-stack">Python · Scikit-learn</div>
+        </div>
+        <p class="project-desc">An end-to-end linear regression model predicting California housing prices. Covers data cleaning, feature selection, train/test splitting, and model evaluation — built in Google Colab from scratch.</p>
+        <div class="project-links">
+          <a href="#">View Code →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <div class="project-title">Nifty 50 Dashboard</div>
+          <div class="project-stack">Python · Data Viz</div>
+        </div>
+        <p class="project-desc">An interactive dashboard tracking Nifty 50 index movement and sector trends, built to practice translating raw financial data into a readable, decision-useful visual.</p>
+        <div class="project-links">
+          <a href="#">View Code →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT — STAGE: CLOSED ============ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-shell">
+      <div class="contact-cta reveal">
+        <h2>Let's talk.</h2>
+        <p>Open to internships, hybrid tech-business roles, and conversations with anyone building something interesting. I respond fast — it's the cold-calling instinct.</p>
+        <a href="mailto:hbhamini2405@gmail.com" class="btn btn-primary">Send an Email →</a>
+      </div>
+      <div class="contact-list reveal">
+        <div class="contact-item">
+          <a href="mailto:hbhamini2405@gmail.com" style="display:flex; justify-content:space-between; width:100%;">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">hbhamini2405@gmail.com</span>
+          </a>
+        </div>
+        <div class="contact-item">
+          <a href="https://www.linkedin.com/in/bhamini-h-726180336?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="display:flex; justify-content:space-between; width:100%;">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">/ https://www.linkedin.com/in/bhamini-h-726180336?utm_source=share_via&utm_content=profile&utm_medium=member_android</span>
+          </a>
+        </div>
+        <div class="contact-item">
+          <a href="https://github.com/yourprofile" target="_blank" style="display:flex; justify-content:space-between; width:100%;">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">@yourprofile</span>
+          </a>
+        </div>
+        <div class="contact-item">
+          <span style="display:flex; justify-content:space-between; width:100%;">
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Chennai,Tamilnadu,India</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed &amp; built by Bhamini 
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
