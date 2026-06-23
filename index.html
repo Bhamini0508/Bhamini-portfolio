@@ -311,7 +311,86 @@
   @media (max-width:760px){
     .about-grid{grid-template-columns:1fr;}
   }
+/* ============ EDUCATION ============ */
+  .edu-timeline{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .edu-item{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:24px;
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .edu-item:first-child{border-top:1px solid var(--line);}
+  .edu-year{
+    font-family:var(--mono);
+    font-size:0.85rem;
+    color:var(--amber);
+    font-weight:500;
+  }
+  .edu-degree{
+    font-family:var(--display);
+    font-size:1.3rem;
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .edu-school{
+    color:var(--cream-dim);
+    font-size:0.95rem;
+    margin-bottom:8px;
+  }
+  .edu-grade{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--sage);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+  }
+  @media (max-width:600px){
+    .edu-item{grid-template-columns:1fr; gap:6px;}
+  }
+  <!-- ============ EDUCATION ============ -->
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-timeline reveal">
 
+      <div class="edu-item">
+        <div class="edu-year">2025 — Present</div>
+        <div>
+          <div class="edu-degree">B.Tech, Artificial Intelligence &amp; Data Science</div>
+          <div class="edu-school">[Your College Name], Chengalpattu, Tamil Nadu</div>
+          <div class="edu-grade">CGPA: [X.XX] / 10</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year">[Year]</div>
+        <div>
+          <div class="edu-degree">Higher Secondary (12th)</div>
+          <div class="edu-school">[Your School Name]</div>
+          <div class="edu-grade">[X]% / [Board Name]</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year">[Year]</div>
+        <div>
+          <div class="edu-degree">Secondary School (10th)</div>
+          <div class="edu-school">[Your School Name]</div>
+          <div class="edu-grade">[X]% / [Board Name]</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
   /* ============ SKILLS (stage: QUALIFIED) ============ */
   .skill-rows{display:flex; flex-direction:column; gap:0;}
   .skill-row{
@@ -469,6 +548,7 @@
     <div class="logo">Bhamini<span>.</span></div>
     <div class="navlinks">
       <a href="#about">About</a>
+      <a href="#education">Education</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
